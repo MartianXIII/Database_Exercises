@@ -17,3 +17,7 @@ SELECT concat(first_name, ' ', last_name) AS full_name
 FROM employees
 WHERE (last_name LIKE 'E%'
 AND last_name LIKE 'E%');
+
+SELECT concat(first_name, ' ', last_name) AS full_name
+FROM employees
+WHERE hire_date BETWEEN '1990-01-01' AND '1999-12-31'
