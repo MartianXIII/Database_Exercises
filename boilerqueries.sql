@@ -1,10 +1,16 @@
     -- MYSQL-BOILER QUERIES
 
     -- Connecting in Terminal
+    mysql -h <host> -u <user> -p<passwd>
+    mysql -h <host> -u <user> -p
+    Enter password: ***
+    mysql -u user -p
+    mysql
+    mysql -h <host> -u <user> -p <Database>
 
 
 
-
+      
       -- QUERY
   SELECT * FROM table
   SELECT * FROM table1, table2, ...
