@@ -80,3 +80,62 @@
     SELECT table_name, table_rows FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '**yourdbname**';
     $ mysqlshow
     $ mysqlshow database
+
+
+
+    -- CREATE_DELETE_SELECT_ALTER-DATABASE
+    CREATE DATABASE [IF NOT EXISTS] mabase [CHARACTER SET charset] [COLLATE collation]
+    CREATE DATABASE mabase CHARACTER SET utf8
+    DROP DATABASE mabase
+    USE mabase
+
+    ALTER DATABASE mabase CHARACTER SET utf8
+
+
+
+    -- CREATE_DELETE_MODIFY TABLE
+    CREATE TABLE table (field1 type1, field2 type2, ...)
+    CREATE TABLE table (field1 type1 unsigned not null auto_increment, field2 type2, ...)
+    CREATE TABLE table (field1 type1, field2 type2, ..., INDEX (field))
+    CREATE TABLE table (field1 type1, field2 type2, ..., PRIMARY KEY (field1))
+    CREATE TABLE table (field1 type1, field2 type2, ..., PRIMARY KEY (field1, field2))
+    CREATE TABLE table1 (fk_field1 type1, field2 type2, ...,
+      FOREIGN KEY (fk_field1) REFERENCES table2 (t2_fieldA)
+        [ON UPDATE] [CASCADE|SET NULL|RESTRICT]
+        [ON DELETE] [CASCADE|SET NULL|RESTRICT])
+    CREATE TABLE table1 (fk_field1 type1, fk_field2 type2, ...,
+      FOREIGN KEY (fk_field1, fk_field2) REFERENCES table2 (t2_fieldA, t2_fieldB))
+    CREATE TABLE table IF NOT EXISTS (...)
+
+    CREATE TABLE new_tbl_name LIKE tbl_name
+      [SELECT ... FROM tbl_name ...]
+
+    CREATE TEMPORARY TABLE table (...)
+
+    CREATE table new_table_name as SELECT [ *|column1, column2 ] FROM table_name
+
+    DROP TABLE table
+    DROP TABLE IF EXISTS table
+    DROP TABLE table1, table2, ...
+    DROP TEMPORARY TABLE table
+
+    ALTER TABLE table MODIFY field1 type1
+    ALTER TABLE table MODIFY field1 type1 NOT NULL ...
+    ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1
+    ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1 NOT NULL ...
+    ALTER TABLE table ALTER field1 SET DEFAULT ...
+    ALTER TABLE table ALTER field1 DROP DEFAULT
+    ALTER TABLE table ADD new_name_field1 type1
+    ALTER TABLE table ADD new_name_field1 type1 FIRST
+    ALTER TABLE table ADD new_name_field1 type1 AFTER another_field
+    ALTER TABLE table DROP field1
+    ALTER TABLE table ADD INDEX (field);
+    ALTER TABLE table ADD PRIMARY KEY (field);
+
+    -- Change field order:
+    ALTER TABLE table MODIFY field1 type1 FIRST
+    ALTER TABLE table MODIFY field1 type1 AFTER another_field
+    ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1 FIRST
+    ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1 AFTER another_field
+
+    ALTER TABLE old_name RENAME new_name;
