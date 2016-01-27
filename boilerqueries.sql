@@ -49,6 +49,7 @@
 
 
 
+
     -- DATA MANIPULATION
     INSERT INTO table1 (field1, field2, ...) VALUES (value1, value2, ...)
     INSERT table1 SET field1=value_1, field2=value_2 ...
@@ -68,6 +69,7 @@
 
 
 
+
     -- BROWSING
     SHOW DATABASES
     SHOW TABLES
@@ -83,6 +85,7 @@
 
 
 
+
     -- CREATE_DELETE_SELECT_ALTER-DATABASE
     CREATE DATABASE [IF NOT EXISTS] mabase [CHARACTER SET charset] [COLLATE collation]
     CREATE DATABASE mabase CHARACTER SET utf8
@@ -90,6 +93,7 @@
     USE mabase
 
     ALTER DATABASE mabase CHARACTER SET utf8
+
 
 
 
@@ -132,6 +136,9 @@
     ALTER TABLE table ADD INDEX (field);
     ALTER TABLE table ADD PRIMARY KEY (field);
 
+
+
+
     -- Change field order:
     ALTER TABLE table MODIFY field1 type1 FIRST
     ALTER TABLE table MODIFY field1 type1 AFTER another_field
@@ -139,3 +146,20 @@
     ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1 AFTER another_field
 
     ALTER TABLE old_name RENAME new_name;
+
+
+
+
+    -- KEYS
+    CREATE TABLE table (..., PRIMARY KEY (field1, field2))
+    CREATE TABLE table (..., FOREIGN KEY (field1, field2)) REFERENCES table2 (t2_field1, t2_field2))
+    ALTER TABLE table ADD PRIMARY KEY (field);
+    ALTER TABLE table ADD CONSTRAINT constraint_name PRIMARY_KEY (field, field2);
+
+
+
+
+    -- CREATE_MODIFY_DROP VIEW
+    CREATE VIEW view AS SELECT ... FROM table WHERE ...
+
+    
