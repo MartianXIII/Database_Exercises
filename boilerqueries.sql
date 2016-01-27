@@ -1,4 +1,5 @@
     -- MYSQL-BOILER QUERIES
+    -- MARS MARTIAN
 
 
 
@@ -162,4 +163,82 @@
     -- CREATE_MODIFY_DROP VIEW
     CREATE VIEW view AS SELECT ... FROM table WHERE ...
 
-    
+
+
+
+    -- PRIVILEGES
+    CREATE USER 'user'@"localhost" IDENTIFIED BY 'password';
+    GRANT ALL PRIVILEGES ON base.* TO 'user'@'localhost' IDENTIFIED BY 'password';
+    GRANT SELECT, INSERT, DELETE ON base.* TO 'user'@'localhost' IDENTIFIED BY 'password';
+    REVOKE ALL PRIVILEGES ON base.* FROM 'user'@'host'; -- one permission only
+    REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'user'@'host'; -- all permissions
+
+    SET PASSWORD = PASSWORD('new_pass')
+    SET PASSWORD FOR 'user'@'host' = PASSWORD('new_pass')
+    SET PASSWORD = OLD_PASSWORD('new_pass')
+
+    DROP USER 'user'@'host'
+
+
+
+
+    -- MAIN DATA TYPES    EXXAMPLESS
+    TINYINT   (1o: -127+128)
+    SMALLINT  (2o: +-65 000)
+    MEDIUMINT (3o: +-16 000 000)
+    INT       (4o: +-2 000 000 000)
+    BIGINT    (8o: +-9.10^18)
+      Precise interval: -(2^(8*N-1)) -> (2^8*N)-1
+      /!\ INT(2) = "2 digits displayed" -- NOT "number with 2 digits max"
+
+
+    INT NOT NULL auto_increment PRIMARY KEY -- auto-counter for PK
+
+
+    FLOAT(M,D) DOUBLE(M,D) FLOAT(D=0->53)
+      /!\ 8,3 -> 12345,678 -- NOT 12345678,123!
+
+
+    TIME (HH:MM) YEAR (AAAA) DATE (AAAA-MM-JJ) DATETIME (AAAA-MM-JJ HH:MM; années 1000->9999)
+      TIMESTAMP (like DATETIME, but 1970->2038, compatible with Unix)
+
+    VARCHAR (single-line; explicit size)
+    TEXT (multi-lines; max size=65535)
+    BLOB (binary; max size=65535)
+      Variants for TEXT&BLOB: TINY (max=255) MEDIUM (max=~16000) LONG (max=4Go)
+     Ex: VARCHAR(32), TINYTEXT, LONGBLOB, MEDIUMTEXT
+
+
+     ENUM ('value1', 'value2', ...) -- (default NULL, or '' if NOT NULL)
+
+
+
+
+    --  FORGOT ROOT PASSWORD??!?   nub
+    $ /etc/init.d/mysql stop
+    $ mysqld_safe --skip-grant-tables &
+    $ mysql # on another terminal
+    mysql> UPDATE mysql.user SET password=PASSWORD('nouveau') WHERE user='root';
+    ## Kill mysqld_safe from the terminal, using Control + \
+    $ /etc/init.d/mysql start
+
+
+
+
+    -- REPAIR TABLES AFTER UNCLEAN SHUTDOWN
+    mysqlcheck --all-databases
+    mysqlcheck --all-databases --fast
+
+
+
+
+    -- LOADING DATA
+    mysql> SOURCE input_file
+    $ mysql database < filename-20120201.sql
+    $ cat filename-20120201.sql | mysql database
+
+
+
+
+    https://en.wikibooks.org/wiki/Special:Categories
+    https://en.wikibooks.org/wiki/Category:MySQL
